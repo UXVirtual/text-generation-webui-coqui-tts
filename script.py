@@ -9,7 +9,7 @@ import traceback
 
 from modules import chat, shared, ui_chat
 from modules.utils import gradio
-from extensions.coqui_tts import tts_preprocessor
+from extensions.coqui_tts_legacy import tts_preprocessor
 
 params = {
     'activate': True,
@@ -138,7 +138,7 @@ def output_modifier(string, state):
         character = state.get('character_menu',None)
         output_base_dir = os.environ.get('COQUI_OUTPUT_BASE_DIR', None)
         output_prefix = output_base_dir +'/' if output_base_dir is not None else ''
-        output_file = Path(f'{output_prefix}extensions/coqui_tts/outputs/{character}_{int(time.time())}.wav')
+        output_file = Path(f'{output_prefix}extensions/coqui_tts_legacy/outputs/{character}_{int(time.time())}.wav')
         print(f'Outputting audio to {str(output_file)}')
 
         speaker = params['selected_speaker'] if params['selected_speaker'] is not None else os.environ.get('COQUI_TTS_SPEAKER', None)
