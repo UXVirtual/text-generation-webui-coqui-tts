@@ -142,6 +142,8 @@ def output_modifier(string, state):
 
         speaker = params['selected_speaker'] if params['selected_speaker'] is not None else os.environ.get('COQUI_TTS_SPEAKER', None)
 
+        string = string.replace("#x27", "'")
+
         try:
             if params['voice_clone_reference_path'] is not None:
                 model.tts_with_vc_to_file(text=string, language=params['language'], speaker_wav=params['voice_clone_reference_path'], file_path=str(output_file))
@@ -160,6 +162,7 @@ def output_modifier(string, state):
             string += f'\n\n{original_string}'
 
     shared.processing_message = "*Is typing...*"
+
     return string
 
 
