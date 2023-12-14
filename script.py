@@ -29,7 +29,8 @@ current_params = params.copy()
 speakers = []
 languages = []
 
-models = TTS().list_models()
+tts_manager = TTS().list_models()
+all_models = tts_manager.list_models()
 
 
 def load_model():
@@ -177,7 +178,7 @@ def ui():
 
             show_text = gr.Checkbox(value=params['show_text'], label='Show message text under audio player')
             show_processed_text = gr.Checkbox(value=params['show_processed_text'], label='Show processed text under audio player')
-            model_dropdown = gr.Dropdown(value=models[models.index(params['model_name'])] if params['model_name'] in models else None, choices=models, type='index', label='TTS Model')
+            model_dropdown = gr.Dropdown(value=all_models[all_models.index(params['model_name'])] if params['model_name'] in all_models else None, choices=all_models, type='index', label='TTS Model')
             use_custom_model = gr.Checkbox(value=params['use_custom_model'], label='Use Custom TTS Model')
             custom_model_textbox = gr.Textbox(value=params['custom_model_path'], label='Custom TTS Model Path')
             speaker_dropdown = gr.Dropdown(value=params['selected_speaker'], choices=model.speakers if model.speakers is not None else [], label='TTS Speaker')
